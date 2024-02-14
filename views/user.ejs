@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    <title>User Profile</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>User Profile</h2>
+      <img class="profile-pic" src="<%= userImage %>" alt="Profile Picture" />
+      <div class="user-info">
+        <p><strong>Name:</strong> <%= userName %></p>
+        <p><strong>Additional Information:</strong> <%= userDescription %></p>
+      </div>
+      <button class="btn" onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+      const goBack = () => {
+        window.history.back();
+      };
+    </script>
+  </body>
+</html>
