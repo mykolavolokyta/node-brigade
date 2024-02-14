@@ -13,18 +13,17 @@ class UserController {
         when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
       userImage: "/images/vlad.jpg",
+      github: "https://github.com/vladd4"
     });
   };
 
   // kolya controller
   static kolyaController = (req, res, next) => {
     res.render("../views/user", {
-      userName: "Kolya",
-      userDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
-      userImage: "vlad.jpg",
+      userName: "Mykola",
+      userDescription: `Добряк здоровяк.`,
+      userImage: "/images/kolya.jpg",
+      github: "https://github.com/mykolavolokyta"
     });
   };
 
@@ -37,6 +36,7 @@ class UserController {
         when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
       userImage: path.join(__dirname, "../public/assets/vlad.jpg"),
+      github: "https://github.com/rzhadkpi"
     });
   };
 
@@ -49,6 +49,7 @@ class UserController {
       when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
       It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
       userImage: "vlad.jpg",
+      github: "https://github.com/maxtereshchuk"
     });
   };
 }
