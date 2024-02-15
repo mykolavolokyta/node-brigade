@@ -1,19 +1,12 @@
-const path = require("path");
-
-// заповніть для себе userDescription
-// додайте своє фото в public/images і змініть назву картинки в userImage
-
 class UserController {
   // vlad controller
   static vladController = (req, res, next) => {
     res.render("../views/user", {
       userName: "Vladyslav",
-      userDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+      userDescription: `<br>Студент групи ІП-23<br>
+      Донець Владислав Віталійович`,
       userImage: "/images/vlad.jpg",
-      github: "https://github.com/vladd4"
+      github: "https://github.com/vladd4",
     });
   };
 
@@ -23,7 +16,7 @@ class UserController {
       userName: "Mykola",
       userDescription: `Добряк здоровяк.`,
       userImage: "/images/kolya.jpg",
-      github: "https://github.com/mykolavolokyta"
+      github: "https://github.com/mykolavolokyta",
     });
   };
 
@@ -36,7 +29,7 @@ class UserController {
         Дата народження: 08.08.2005<br>
         Трейдер криптовалют (безхатько)`,
       userImage: "/images/ruslan.jpg",
-      github: "https://github.com/rzhadkpi"
+      github: "https://github.com/rzhadkpi",
     });
   };
 
@@ -48,7 +41,7 @@ class UserController {
       Терещук Максим Русланович<br> 
       Фанат Динамо Київ`,
       userImage: "/images/max.jpg",
-      github: "https://github.com/maxtereshchuk"
+      github: "https://github.com/maxtereshchuk",
     });
   };
 }
