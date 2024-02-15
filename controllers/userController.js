@@ -31,11 +31,11 @@ class UserController {
   static ruslanController = (req, res, next) => {
     res.render("../views/user", {
       userName: "Ruslan",
-      userDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
-      userImage: path.join(__dirname, "../public/assets/vlad.jpg"),
+      userDescription: `<br>Студент групи ІП-23<br>
+        Жадько Руслан Андрійович<br>
+        Дата народження: 08.08.2005<br>
+        Трейдер криптовалют (безхатько)`,
+      userImage: "/images/ruslan.jpg",
       github: "https://github.com/rzhadkpi"
     });
   };
