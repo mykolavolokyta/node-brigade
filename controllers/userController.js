@@ -14,7 +14,9 @@ class UserController {
   static kolyaController = (req, res, next) => {
     res.render("../views/user", {
       userName: "Mykola",
-      userDescription: `Добряк здоровяк.`,
+      userDescription: `<br>Студент групи ІП-23<br>
+      Волокита Микола Артемович<br>
+      Добряк здоровяк`,
       userImage: "/images/kolya.jpg",
       github: "https://github.com/mykolavolokyta",
     });
@@ -25,9 +27,9 @@ class UserController {
     res.render("../views/user", {
       userName: "Ruslan",
       userDescription: `<br>Студент групи ІП-23<br>
-        Жадько Руслан Андрійович<br>
-        Дата народження: 08.08.2005<br>
-        Трейдер криптовалют (безхатько)`,
+      Жадько Руслан Андрійович<br>
+      Дата народження: 08.08.2005<br>
+      Трейдер криптовалют (безхатько)`,
       userImage: "/images/ruslan.jpg",
       github: "https://github.com/rzhadkpi",
     });
