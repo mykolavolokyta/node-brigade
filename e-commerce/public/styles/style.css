@@ -5,6 +5,8 @@ body {
   width: 100%;
   height: 100%;
   background-color: #f3f3f3;
+  display: grid;
+  place-items: center;
 }
 .container-fluid {
   margin: 0;
@@ -61,13 +63,16 @@ body {
   font-size: 16px;
   margin: 0;
 }
-.price_block button {
+.price_block a {
   font-size: 16px;
   border: 1px solid #000;
   border-radius: 7px;
   background-color: #f3f3f3;
   width: 25%;
   transition: all 0.3s;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
 }
 .price_block button:hover {
   background-color: #000;
@@ -99,4 +104,51 @@ body {
 }
 .info_block h5 {
   margin: 2% 0%;
+}
+.admin-login {
+  border-radius: 7px;
+  border: 1px solid #000;
+  background-color: transparent;
+  padding: 0.7%;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: #000;
+}
+.admin-login:hover {
+  background-color: #000;
+  color: #fff;
+}
+.login-form {
+  width: 30%;
+  /* height: 50%; */
+  display: grid;
+  place-items: center;
+  border: 1px solid #000;
+  border-radius: 7px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 2%;
+  transform: translate(-50%, -50%);
+}
+.login-form input {
+  width: 96%;
+  padding: 3% 2%;
+  border-radius: 7px;
+  background-color: #f3f3f3;
+  margin-bottom: 2%;
+  border: 1px solid #000;
+}
+.login-form button {
+  width: 100%;
+  padding: 3% 2%;
+  background-color: #f3f3f3;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.login-form button:hover {
+  background-color: #000;
+  color: #fff;
 }

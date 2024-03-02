@@ -1,0 +1,15 @@
+id,category,parentCategoryID
+1,Apple Iphone,null
+2,Apple TV,null
+3,Apple Macbook,null
+4,Apple iPad,null
+5,Airpods,null
+6,Apple Watch,6
+7,Iphone 12 pro,1
+8,Iphone 13 pro,1
+9,Iphone 14 pro,1
+10,Macbook M1,3
+11,Macbook Pro M2,3
+12,iPad 15,4
+13,iPad 16,4
+14,iPad 17,4
