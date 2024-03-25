@@ -1,15 +1,13 @@
-// type User = {
+// type Admin = {
 //     id: number,
-//     name: string
 //     email: String
 //     password: String
-//     role: admin | user
 // }
 
 // type Category = {
 //     id: number,
 //     category: string
-//     parentCategoryId: number
+//     parentCategoryId: number | null
 // }
 
 // type Product = {

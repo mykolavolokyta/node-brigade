@@ -14,7 +14,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">E-commerce</a>
+      <a class="navbar-brand" href="/">E-commerce</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -28,132 +28,51 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+          <% categories.forEach(category => { %> <% if
+          (CategoryController.isParentCategory(category.id)) { %>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
+              href="/category/<%= category.id%>"
+              id="navbarDropdownMenuLink<%= category.id %>"
               role="button"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              iPhones
+              <%= category.category %>
             </a>
             <div
               class="dropdown-menu"
-              aria-labelledby="navbarDropdownMenuLink"
+              aria-labelledby="navbarDropdownMenuLink<%= category.id %>"
             >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <% categories.filter(child => child.parentCategoryID ===
+              category.id).forEach(child => { %>
+              <a class="dropdown-item" href="/category/<%= child.id%>"
+                ><%= child.category %></a
+              >
+              <% }) %>
             </div>
           </li>
+          <% } else if ((CategoryController.isParentCategory(category.id)) ===
+          false) { %>
           <li class="nav-item">
-            <a class="nav-link" href="#">Apple TV</a>
+            <a class="nav-link" href="/category/<%= category.id%>"
+              ><%= category.category %></a
+            >
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Apple Keyboard</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Tablets
-            </a>
-            <div
-              class="dropdown-menu"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Watches
-            </a>
-            <div
-              class="dropdown-menu"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Airpods
-            </a>
-            <div
-              class="dropdown-menu"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Computers
-            </a>
-            <div
-              class="dropdown-menu"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
+          <% } else {null}%> <% }) %>
         </ul>
       </div>
+      <a href="/login" class="admin-login">Login as Admin</a>
     </nav>
     <div class="container-fluid product-page">
         <img alt="Product" src="https://www.istore.ua/upload/iblock/1b4/kir2acngziae43e6gpsdw28rgk6q8mld/15_pro_max_white_titan_4_is.png" />
         <div class="info_block">
-          <h1>Apple iPhone 15</h1>
-          <h5>Кількість: 5 шт.</h5>
-          <h5>Ціна: 1555$</h5>
-          <p>iPhone 15 Pro — перший iPhone, виготовлений з титану аерокосмічного класу з використанням того самого сплаву, який використовують космічні кораблі для польотів на Марс.
-            Титан має одне з найкращих серед усіх металів співвідношення міцності та ваги, що робить iPhone 15 Pro Max найлегшим з професійних моделей. Ви помітите різницю, коли візьмете один з них в руки.
-            Красиве покриття титанових ремінців із тонким шліфуванням досягається за допомогою точної механічної обробки, шліфування, чищення щіткою та струминної обробки.
-            Нові контурні краї та найтонші рамки, які коли-небудь були на iPhone, роблять його ще зручнішим для тримання в руці.
-            Титановий ремінець з’єднаний із новою внутрішньою алюмінієвою рамою завдяки твердотільній дифузії. Це перша в галузі інновація з використанням термомеханічного процесу, який з’єднує ці два метали з неймовірною міцністю.
-            Внутрішня рама також виготовлена з 100% переробленого алюмінію, що сприяє загальному використанню перероблених матеріалів і допомагає нам працювати над досягненням кліматичних цілей до 2030 року. </p>
+          <h1><%= product.title %></h1>
+          <h5>Кількість: <%= product.quantity %> шт.</h5>
+          <h5>Ціна: <%= product.price %>$</h5>
+          <p><%= product.description %> </p>
         </div>
         <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
