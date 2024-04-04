@@ -47,7 +47,7 @@
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink<%= category.id %>"
               >
-                <% categories.filter(child => child.parentCategoryID ===
+                <% categories.filter(child => child.parentCategoryId ===
                 category.id).forEach(child => { %>
                 <a class="dropdown-item" href="/category/<%= child.id%>"
                   ><%= child.category %></a
@@ -73,7 +73,7 @@
         <div class="products_row">
           <% products.forEach(product => { %>
           <div class="product_card">
-            <img alt="Product" src="<%= product.imageURL %>" />
+            <img alt="Product" src="<%= product.imageUrl %>" />
             <div class="text_block">
               <h5><%= product.title %></h5>
               <p><%= product.description %></p>

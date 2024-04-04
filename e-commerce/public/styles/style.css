@@ -152,3 +152,196 @@ body {
   background-color: #000;
   color: #fff;
 }
+
+.admin-header {
+  justify-content: space-between;
+}
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+select {
+  appearance: none;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px;
+  background-color: #fff;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23808080"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+select:hover {
+  border-color: #999;
+}
+
+select:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+.all-products {
+  width: 90%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.all-products table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.image {
+  width: 120px;
+}
+.image img {
+  width: 100%;
+}
+.all-products th,
+.all-products td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.all-products th {
+  background-color: #f2f2f2;
+}
+.all-products td.actions {
+  text-align: end;
+}
+.all-products td.actions button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.all-products td.actions button.delete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.all-products td.actions button.edit {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.all-products td.actions button:hover {
+  opacity: 0.7;
+}
+.add-items-block {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1%;
+  margin-top: 3%;
+}
+.add-items-block button {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.add-items-block button:hover {
+  opacity: 0.7;
+}
+#productForm {
+  position: fixed;
+  z-index: 1001;
+  top: -3%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: all 0.3s;
+  opacity: 0;
+}
+#categoryForm {
+  position: fixed;
+  z-index: 1001;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: all 0.3s;
+  opacity: 0;
+}
+.show_form {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.cancel-btn:hover {
+  background-color: #ee210a;
+}

@@ -1,4 +1,4 @@
-id,category,parentCategoryID
+id,category,parentCategoryId
 1,Apple Iphone,null
 2,Apple TV,null
 3,Apple Macbook,null

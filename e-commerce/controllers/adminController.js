@@ -1,13 +1,53 @@
-class AdminController {
-  //category
-  static createCategory = (req, res, next) => {};
-  static editCategory = (req, res, next) => {};
-  static deleteCategory = (req, res, next) => {};
+const db_pool = require("../db/database");
 
-  // product
-  static createProduct = (req, res, next) => {};
-  static editProduct = (req, res, next) => {};
-  static deleteProduct = (req, res, next) => {};
+class AdminController {
+  //login admin
+  static loginAdmin = async (username, password) => {
+    const [rows] = await db_pool.query(
+      `select * from admin where email = '${username}' AND password = '${password}';`
+    );
+    return rows;
+  };
+  // add category
+  static createCategory = async (newCategory) => {
+    await db_pool.query(
+      `insert into category (category, parentCategoryId) values ('${newCategory.category}', ${newCategory.parentCategoryId});`
+    );
+  };
+  // delete categoty by id
+  static deleteCategory = async (categoryId) => {
+    await db_pool.query(`delete from category where id = ${categoryId};`);
+  };
+
+  // add product
+  static createProduct = async (newProduct) => {
+    await db_pool.query(
+      `insert into product (categoryID, title, description, price, quantity, imageUrl) values (
+        ${newProduct.categoryId}, 
+        '${newProduct.title}', 
+        '${newProduct.description}',
+        ${newProduct.price},
+        ${newProduct.quantity},
+        '${newProduct.imageUrl}'
+        );`
+    );
+  };
+  //updated product by id
+  static editProduct = async (productId, updatedProduct) => {
+    await db_pool.query(
+      `UPDATE product SET
+      title = '${updatedProduct.title}',
+      description = '${updatedProduct.description}',
+      price = ${updatedProduct.price},
+      quantity = ${updatedProduct.quantity},
+      imageUrl = '${updatedProduct.imageUrl}'
+      WHERE id = ${productId};`
+    );
+  };
+  // delete product by id
+  static deleteProduct = async (productId) => {
+    await db_pool.query(`delete from product where id = ${productId};`);
+  };
 }
 
 module.exports = AdminController;
