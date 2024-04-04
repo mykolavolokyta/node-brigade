@@ -4,6 +4,7 @@ const path = require("path");
 const CategoryController = require("../controllers/categoryController");
 const ProductController = require("../controllers/productConstroller");
 const AdminController = require("../controllers/adminController");
+const multer = require("multer");
 
 // home route
 router.get("/", async function (req, res, next) {
@@ -51,6 +52,48 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const extension = file.originalname.split(".").pop();
+    const filename = `image${uniqueSuffix}.${extension}`;
+    cb(null, filename);
+  },
+});
+
+const types = ["image/jpeg", "image/jpg", "image/png"];
+
+const fileFilter = (req, file, cb) => {
+  if (types.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({ storage, fileFilter });
+
+//uploads
+router.post("/upload", upload.single("image"), (req, res) => {
+  try {
+    if (req.file) {
+      res.send(req.file.filename);
+    } else {
+      return res.status(404).json({
+        message: "File not found. Try again.",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "File uploading failed. Try again.",
+    });
+  }
+});
+
 router.get("/category/:categoryId", async function (req, res, next) {
   try {
     await CategoryController.getCategories();
@@ -92,6 +135,8 @@ router.get("/admin", isAuthenticated, async function (req, res, next) {
       CategoryController,
       products: ProductController.newProducts,
       AdminController,
+      ProductController,
+      editProduct: ProductController.product,
     });
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -139,41 +184,71 @@ router.post("/admin/addCategory", async function (req, res, next) {
   }
 });
 
-router.post("/admin/addProduct", async function (req, res, next) {
-  const newProduct = {
-    title: req.body.title,
-    description: req.body.description,
-    price: req.body.price,
-    quantity: req.body.quantity,
-    categoryId: req.body.categoryId,
-    imageUrl: req.body.imageUrl,
-  };
+router.get("/getProductById/:productId", async function (req, res, next) {
+  const productId = req.params.productId;
   try {
-    await AdminController.createProduct(newProduct);
+    await ProductController.getProductById(productId);
     res.redirect("/admin");
   } catch (error) {
-    console.error("Error adding product:", error);
+    console.error("Error getting product:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-// router.put("/admin/editProduct/:productId", async function (req, res, next) {
-//   const productId = req.params.productId;
-//   const updatedProduct = {
-//     title: req.body.title,
-//     description: req.body.description,
-//     price: req.body.price,
-//     quantity: req.body.quantity,
-//     categoryId: req.body.categoryId,
-//     imageUrl: req.body.imageUrl,
-//   };
-//   try {
-//     await AdminController.updatedProduct(productId, updatedProduct);
-//     res.redirect("/admin");
-//   } catch (error) {
-//     console.error("Error updating product:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
+router.post(
+  "/admin/addProduct",
+  upload.single("image"),
+  async function (req, res, next) {
+    try {
+      if (req.file) {
+        const baseUrl = "http://localhost:3000";
+        const imageUrl = baseUrl + "/" + req.file.filename;
+        const newProduct = {
+          title: req.body.title,
+          description: req.body.description,
+          price: req.body.price,
+          quantity: req.body.quantity,
+          categoryId: req.body.categoryId,
+          imageUrl,
+        };
+        await AdminController.createProduct(newProduct);
+        res.redirect("/admin");
+      } else {
+        return res.status(404).json({
+          message: "File not found. Try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
+
+router.put("/admin/editProduct/:productId", async function (req, res, next) {
+  try {
+    let imageUrl = "";
+    if (req.file) {
+      const baseUrl = "http://localhost:3000";
+      imageUrl = baseUrl + "/" + req.file.filename;
+    }
+
+    const productId = req.params.productId;
+    const updatedProduct = {
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      categoryId: req.body.categoryId,
+      imageUrl,
+    };
+
+    await AdminController.editProduct(productId, updatedProduct);
+    res.redirect("/admin");
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = router;

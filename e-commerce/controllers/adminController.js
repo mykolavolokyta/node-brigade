@@ -10,9 +10,15 @@ class AdminController {
   };
   // add category
   static createCategory = async (newCategory) => {
-    await db_pool.query(
-      `insert into category (category, parentCategoryId) values ('${newCategory.category}', ${newCategory.parentCategoryId});`
-    );
+    if (newCategory.parentCategoryId === "null") {
+      await db_pool.query(
+        `insert into category (category, parentCategoryId) values ('${newCategory.category}', null);`
+      );
+    } else {
+      await db_pool.query(
+        `insert into category (category, parentCategoryId) values ('${newCategory.category}', ${newCategory.parentCategoryId});`
+      );
+    }
   };
   // delete categoty by id
   static deleteCategory = async (categoryId) => {
@@ -32,7 +38,7 @@ class AdminController {
         );`
     );
   };
-  //updated product by id
+  //update product by id
   static editProduct = async (productId, updatedProduct) => {
     await db_pool.query(
       `UPDATE product SET
