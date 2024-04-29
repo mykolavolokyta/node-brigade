@@ -35,6 +35,7 @@ class CategoryController {
     // });
     const [rows] = await db_pool.query("select * from category;");
     this.data = rows;
+    return rows;
   };
 
   static getCategoryById = async (categoryId) => {

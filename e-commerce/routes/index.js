@@ -9,10 +9,10 @@ const multer = require("multer");
 // home route
 router.get("/", async function (req, res, next) {
   try {
-    await CategoryController.getCategories();
+    const categorie = await CategoryController.getCategories();
     await ProductController.getAllProducts();
     res.render("../views/index", {
-      categories: CategoryController.data,
+      categories: categorie,
       CategoryController,
       categoryName: "New products",
       products: ProductController.newProducts,
@@ -177,6 +177,7 @@ router.post("/admin/addCategory", async function (req, res, next) {
   };
   try {
     await AdminController.createCategory(newCategory);
+    await CategoryController.getCategories();
     res.redirect("/admin");
   } catch (error) {
     console.error("Error adding category:", error);
@@ -187,8 +188,10 @@ router.post("/admin/addCategory", async function (req, res, next) {
 router.get("/getProductById/:productId", async function (req, res, next) {
   const productId = req.params.productId;
   try {
-    await ProductController.getProductById(productId);
-    res.redirect("/admin");
+    const result = await ProductController.getProductById(productId);
+    // res.redirect("/admin");
+    // console.log(result);
+    return res.status(200).json(result);
   } catch (error) {
     console.error("Error getting product:", error);
     res.status(500).send("Internal Server Error");
@@ -225,25 +228,21 @@ router.post(
   }
 );
 
-router.put("/admin/editProduct/:productId", async function (req, res, next) {
+router.post("/admin/editProduct/:productId", async function (req, res, next) {
   try {
-    let imageUrl = "";
-    if (req.file) {
-      const baseUrl = "http://localhost:3000";
-      imageUrl = baseUrl + "/" + req.file.filename;
-    }
-
     const productId = req.params.productId;
+    console.log(req.body);
+
     const updatedProduct = {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
       quantity: req.body.quantity,
       categoryId: req.body.categoryId,
-      imageUrl,
     };
 
     await AdminController.editProduct(productId, updatedProduct);
+
     res.redirect("/admin");
   } catch (error) {
     console.error("Error updating product:", error);

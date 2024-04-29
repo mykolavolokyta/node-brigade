@@ -72,6 +72,7 @@ class ProductController {
       `select * from product where id = ${productId};`
     );
     this.product = rows[0];
+    return rows[0];
   };
 }
 

@@ -114,9 +114,10 @@
           <label for="parentCategory">Parent Category:</label>
           <select id="parentCategory" name="parentCategory" required>
             <% categories.forEach(function(category) { %>
-            <option value="<%= category.id %>"><%= category.category %></option>
+              <% if (category.parentCategoryId === null) { %>
+                <option value="<%= category.id %>"><%= category.category %></option>
+              <% } %>
             <% }); %>
-            <option value="null">Null</option>
           </select>
 
           <input type="submit" value="Add Category" />
@@ -158,12 +159,14 @@
           <label for="categoryId">Category:</label>
           <select id="categoryId" name="categoryId" required>
             <% categories.forEach(function(category) { %>
-            <option value="<%= category.id %>"><%= category.category %></option>
+              <% if (category.parentCategoryId !== null) { %>
+                <option value="<%= category.id %>"><%= category.category %></option>
+              <% } %>
             <% }); %>
           </select>
 
           <label for="imageUrl">Image URL:</label>
-          <input type="file" name="image" required />
+          <input type="file" name="image"  accept="image/png, image/jpeg" required />
 
           <input type="submit" value="Add Product" />
           <button
@@ -178,20 +181,20 @@
       <div class="container add-product" id="editProductForm">
         <h2>Edit Product</h2>
         <form
-          action="/admin/editProduct/<%= editProduct ? editProduct.id : '' %>"
-          method="post"
-          enctype="multipart/form-data"
+          id="editProductForm-form"
+          method="POST"
+          enctype=application/json"
         >
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" value="<%= editProduct ? editProduct.title : '' %>" required />
+          <label for="edit-title">Title:</label>
+          <input type="text" id="edit-title" name="title" value="<%= editProduct ? editProduct.title : '' %>" required />
       
-          <label for="description">Description:</label>
-          <textarea id="description" name="description" required><%= editProduct ? editProduct.description : '' %></textarea>
+          <label for="edit-description">Description:</label>
+          <textarea id="edit-description" name="description" required><%= editProduct ? editProduct.description : '' %></textarea>
       
-          <label for="price">Price:</label>
+          <label for="edit-price">Price:</label>
           <input
             type="number"
-            id="price"
+            id="edit-price"
             name="price"
             min="0"
             step="0.01"
@@ -199,19 +202,17 @@
             required
           />
       
-          <label for="quantity">Quantity:</label>
-          <input type="number" id="quantity" name="quantity" min="0" value="<%= editProduct ? editProduct.quantity : '' %>" required />
+          <label for="edit-quantity">Quantity:</label>
+          <input type="number" id="edit-quantity" name="quantity" min="0" value="<%= editProduct ? editProduct.quantity : '' %>" required />
       
-          <label for="categoryId">Category:</label>
-          <select id="categoryId" name="categoryId" required>
+          <label for="edit-categoryId">Category:</label>
+          <select id="edit-categoryId" name="categoryId" required>
             <% categories.forEach(function(category) { %>
-            <option value="<%= category.id %>" <%= editProduct && category.id === editProduct.categoryId ? 'selected' : '' %>><%= category.category %></option>
+              <% if (category.parentCategoryId !== null) { %>
+                <option value="<%= category.id %>"><%= category.category %></option>
+              <% } %>
             <% }); %>
           </select>
-      
-          <label for="imageUrl">Image URL:</label>
-          <input type="file" name="image" <%= editProduct ? 'required' : '' %> />
-      
           <input type="submit" value="Save Product" />
           <button
             type="button"
@@ -306,16 +307,29 @@
           }
         }
       }
-      async function editProduct(productId) {
+      function populateFormFields(productData) {
+        document.getElementById("edit-title").value = productData.title;
+        document.getElementById("edit-description").value = productData.description;
+        document.getElementById("edit-price").value = productData.price;
+        document.getElementById("edit-quantity").value = productData.quantity;
+        document.getElementById("edit-categoryId").value = productData.categoryID;
+      
+        const editProductForm = document.getElementById("editProductForm-form");
+         editProductForm.action = `/admin/editProduct/${productData.id}`;
+    }
+      async function editProduct(productId) {      
         document.getElementById("editProductForm").classList.add("show_form");
         try {
-           await fetch(`/getProductById/${productId}`, {
+           const response = await fetch(`/getProductById/${productId}`, {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
               },
             });
             if (response.ok) {
+              const productData = await response.json()
+              console.log(productData);
+              populateFormFields(productData)
               document.getElementById("editProductForm").classList.add("show_form");
             } else {
               throw new Error("Failed to fetch product");
@@ -323,6 +337,7 @@
           } catch (error) {
             console.error("Error:", error);
           }
+         
       }
     </script>
   </body>

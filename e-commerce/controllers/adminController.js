@@ -46,7 +46,7 @@ class AdminController {
       description = '${updatedProduct.description}',
       price = ${updatedProduct.price},
       quantity = ${updatedProduct.quantity},
-      imageUrl = '${updatedProduct.imageUrl}'
+      categoryID = ${updatedProduct.categoryId}
       WHERE id = ${productId};`
     );
   };
