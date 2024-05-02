@@ -46,7 +46,7 @@
               class="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink<%= category.id %>"
             >
-              <% categories.filter(child => child.parentCategoryID ===
+              <% categories.filter(child => child.parentCategoryId ===
               category.id).forEach(child => { %>
               <a class="dropdown-item" href="/category/<%= child.id%>"
                 ><%= child.category %></a
